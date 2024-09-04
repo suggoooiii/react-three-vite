@@ -1,17 +1,32 @@
-import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import glsl from "vite-plugin-glsl"; // Add this line
+import { resolve } from "path";
 
-// This is required for Vite to work correctly with CodeSandbox
-const server = process.env.APP_ENV === "sandbox" ? { hmr: { clientPort: 443 } } : {};
-
-// https://vitejs.dev/config/
 export default defineConfig({
-  server: server,
+  plugins: [
+    react(),
+    glsl({
+      include: [
+        // Glob pattern, or array of glob patterns to import
+        "**/*.glsl",
+        "**/*.wgsl",
+        "**/*.vert",
+        "**/*.frag",
+        "**/*.vs",
+        "**/*.fs",
+      ],
+      exclude: undefined, // Glob pattern, or array of glob patterns to ignore
+      warnDuplicatedImports: false, // Warn if the same chunk was imported multiple times
+      defaultExtension: "glsl", // Shader suffix when no extension is specified
+      compress: false, // Compress output shader code
+      watch: true, // Recompile shader on change
+      root: "/", // Directory for root imports
+    }),
+  ],
   resolve: {
     alias: {
-      "@src": resolve(__dirname, "./src"),
+      "@": resolve(__dirname, "./src"),
     },
   },
-  plugins: [react()],
 });
