@@ -1,15 +1,10 @@
 import * as THREE from "three";
 import { Canvas, extend, createPortal, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useFBO } from "@react-three/drei";
-import { Bloom, EffectComposer, N8AO } from "@react-three/postprocessing";
-import { easing } from "maath";
 import { RoundedBoxGeometry } from "three-stdlib";
 import { usePerf } from "r3f-perf";
-import { Caustics, CustomGeometryParticles, SimulationMaterial, FBOparticles } from "./components";
-import { useMemo, useRef } from "react";
-import fragShader from "./glsl/fragshder.glsl";
-import vertShader from "./glsl/vertshder.glsl";
-import { useControls } from "leva";
+import { CustomGeometryParticles, SimulationMaterial, FBOparticles } from "./components";
+import { easing } from "maath";
 
 extend({ RoundedBoxGeometry, SimulationMaterial });
 
