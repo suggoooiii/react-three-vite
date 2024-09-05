@@ -19,7 +19,7 @@ const getRandomDataSphere = (width, height) => {
     data[stride] = distance * Math.sin(theta) * Math.cos(phi);
     data[stride + 1] = distance * Math.sin(theta) * Math.sin(phi);
     data[stride + 2] = distance * Math.cos(theta);
-    data[stride + 3] = Math.random(); // this value will not have any impact
+    data[stride + 3] = 1.0; // this value will not have any impact
   }
 
   return data;

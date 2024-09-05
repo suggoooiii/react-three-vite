@@ -131,7 +131,7 @@ void main() {
 
     // apply curl noise to the positions
     pos += curlNoise(pos * uFrequency + atan(uTime) * 0.015);
-    pos /= curlNoise(pos * uFrequency * 2.0) * 0.5;
+    pos -= curlNoise(pos * uFrequency * 2.0) * 0.5;
     pos *= curlNoise(pos * uFrequency * sin(uTime) * .55);
 
     gl_FragColor = vec4(pos, 1.0);
