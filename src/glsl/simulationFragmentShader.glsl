@@ -124,15 +124,13 @@ vec3 curlNoise(vec3 p){
 //   gl_FragColor = vec4(mix(pos, curlPos, sin(uTime)), 1.0);
 
 void main() {
-    float time = abs(sin(uTime * 0.5));
     vec3 spherePositions = texture2D(positionsA, vUv).rgb;
     vec3 boxPositions = texture2D(positionsB, vUv).rgb;
-    vec3 pos = mix(boxPositions, spherePositions, time);
+    vec3 pos = mix(boxPositions, spherePositions, abs(tan(uTime * 0.2)));
 
     // apply curl noise to the positions
-    pos += curlNoise(pos * uFrequency + atan(uTime) * 0.015);
     pos -= curlNoise(pos * uFrequency * 2.0) * 0.5;
-    pos *= curlNoise(pos * uFrequency * sin(uTime) * .55);
+    pos += curlNoise(pos * uFrequency + uTime * 0.1);
 
     gl_FragColor = vec4(pos, 1.0);
 }
